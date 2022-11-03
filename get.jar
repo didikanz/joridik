@@ -1,0 +1,13 @@
+or (Object o : list) {
+
+    List<String> atributes = new ArrayList<String>();
+
+    for (java.lang.reflect.Field field :o.getClass().getDeclaredFields()) { 
+        field.setAccessible(true);
+        Object value = field.get(o);
+        if (value != null) {
+            if (value.getClass().isInstance(Date.class)) {
+                atributes.add(convertDateToString((java.util.Date) value));
+            }
+            atributes.add(value.toString());
+        }
